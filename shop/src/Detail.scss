@@ -1,0 +1,21 @@
+ $maincolor : #ff0000;
+
+ .red{
+     color: $maincolor;
+ }
+
+ .my-alert{
+     background: #e0e0e0;
+     padding: 15px;
+     border-radius: 5px;
+     max-width: 500px;
+     width: 100%;
+     margin: 0 auto;
+     p{
+        margin-bottom: 0;
+     }
+ }
+ .my-alert-red{
+     @extend .my-alert;
+     background: red;
+ }
