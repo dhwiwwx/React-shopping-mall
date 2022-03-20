@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { getElementError } from "@testing-library/react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from 'styled-components';
 import './Detail.scss'
@@ -11,6 +12,9 @@ let 제목 = styled.h4`
     color: ${props => props.색상}
   `;
 function Detail(props) {
+  useEffect(()=>{
+    setTimeout(() => {document.getElementsByClassName(my-alert)}, 2000);
+  });
 
   let { id } = useParams();
   let history = useHistory();
