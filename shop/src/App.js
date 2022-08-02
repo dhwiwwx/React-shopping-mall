@@ -3,10 +3,11 @@ import './App.css';
 import React, { useState } from 'react';
 import Data from './data.js';
 
-import { Link, Route, Routes } from 'react-router-dom';
-import Details from './Detail';
+import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
+import Detail from './pages/Detail';
 function App() {
-  let [shoes, shoes변경] = useState(Data);
+  let [shoes] = useState(Data);
+  let navigate = useNavigate();
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -15,8 +16,8 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link><Link to="/">Home</Link></Nav.Link>
-              <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+              <Nav.Link onClick={() => { navigate(-1) }}>Home</Nav.Link>
+              <Nav.Link onClick={() => { navigate('/detail') }}>Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -51,13 +52,39 @@ function App() {
             </div>
           </>
         } />
-        <Route path="/detail" element={<Details />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="*" element={<div>없는페이지</div>} />
+        <Route path='/about' element={<About></About>}>
+          <Route path='member' element={<div>member</div>} />
+          <Route path='location' element={<div>location</div>} />
+        </Route>
+        <Route path='/event' element={<Event></Event>}>
+          <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>} />
+        </Route>
       </Routes>
 
 
     </div >
   );
 }
+function About() {
+  return (
+    <div>
+      <h4>회사정보</h4>
+      <Outlet></Outlet>
+    </div>
+  )
+};
+
+function Event() {
+  return (
+    <>
+      <h4>오늘의 이벤트</h4>
+      <Outlet></Outlet>
+    </>
+  )
+};
+
 function Card(props) {
   return (
     <div className="col-md-4">
