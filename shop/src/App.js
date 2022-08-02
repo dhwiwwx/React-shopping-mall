@@ -2,11 +2,9 @@ import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './App.css';
 import React, { useState } from 'react';
 import Data from './data.js';
-import { Modal } from 'bootstrap';
-import { Link, Route, Switch } from 'react-router-dom';
-import Detail from './Detail';
-import axios from 'axios';
 
+import { Link, Route, Routes } from 'react-router-dom';
+import Details from './Detail';
 function App() {
   let [shoes, shoes변경] = useState(Data);
   return (
@@ -30,62 +28,45 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <Switch>
-        <Route exact path="/">
-          <div className='Jumbotron'>
-            <h1>30% Season off</h1>
-            <p>This is a simple hero unit, a simple
-              jumbotron-style component for calling
-              extra attention to featured content or information.
-            </p>
-            <p>
-              <Button variant="primary">Primary</Button>
-            </p>
-          </div>
-
-          <div className="container">
-            <div className='row'>
-              {
-                shoes.map((a, i) => {
-                  return <Card shoes={shoes[i]} i={i} key={i} />
-                })
-              }
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className='Jumbotron'>
+              <h1>30% Season off</h1>
+              <p>This is a simple hero unit, a simple
+                jumbotron-style component for calling
+                extra attention to featured content or information.
+              </p>
+              <p>
+                <Button variant="primary">Primary</Button>
+              </p>
             </div>
-            <button className='btn btn-primary' onClick={() => {
-              axios.get('https://codingapple1.github.io/shop/data2.json')
-                .then((result) => {
-                  console.log(result.data);
-                })
-                .catch(() => {
-                  console.log('실패');
-                });
-            }}>더보기</button>
-          </div>
-        </Route>
+            <div className="container">
+              <div className="row">
+                {
+                  shoes.map((a, i) => {
+                    return <Card shoes={shoes[i]} i={i} key={i}></Card>
+                  })}
+              </div>
+            </div>
+          </>
+        } />
+        <Route path="/detail" element={<Details />} />
+      </Routes>
 
 
-        <Route path="/detail/:id">
-          <Detail shoes={shoes} />
-        </Route>
-
-        <Route path="/:id">
-          <div>아무거나 적었을떄 이거 보여주셈</div>
-        </Route>
-
-      </Switch>
-    </div>
+    </div >
   );
 }
-
 function Card(props) {
   return (
     <div className="col-md-4">
       <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} width="100%" />
       <h4>{props.shoes.title}</h4>
-      <p>{props.shoes.content} & {props.shoes.price}</p>
+      <p>{props.shoes.price}</p>
     </div>
   )
 }
+
 
 export default App;
