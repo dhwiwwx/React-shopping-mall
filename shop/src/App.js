@@ -52,7 +52,10 @@ function App() {
             </div>
           </>
         } />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+
+
+
         <Route path="*" element={<div>없는페이지</div>} />
         <Route path='/about' element={<About></About>}>
           <Route path='member' element={<div>member</div>} />
