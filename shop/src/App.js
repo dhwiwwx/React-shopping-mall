@@ -2,11 +2,13 @@ import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './App.css';
 import React, { useState } from 'react';
 import Data from './data.js';
-
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail';
+import axios from 'axios';
+
+
 function App() {
-  let [shoes] = useState(Data);
+  let [shoes, setShoes] = useState(Data);
   let navigate = useNavigate();
   return (
     <div className="App">
@@ -50,6 +52,15 @@ function App() {
                   })}
               </div>
             </div>
+            <button onClick={()=>{
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((결과)=>{
+                console.log(결과.data)
+                let shoescopy = [...shoes, ...결과.data];
+                setShoes(shoescopy)
+              })
+              Promise.all([])
+            }}>Button</button>
           </>
         } />
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
