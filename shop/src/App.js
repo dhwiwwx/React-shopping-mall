@@ -1,10 +1,11 @@
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './App.css';
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import Data from './data.js';
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail';
 import axios from 'axios';
+export let Context1 = createContext()
 
 
 function App() {
@@ -63,7 +64,11 @@ function App() {
             }}>Button</button>
           </>
         } />
-        <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+        <Route path="/detail/:id" element={
+        <Context1.Provider>
+        <Detail shoes={shoes} />
+        </Context1.Provider>
+      } />
 
 
 
