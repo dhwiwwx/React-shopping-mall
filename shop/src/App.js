@@ -5,6 +5,7 @@ import Data from './data.js';
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail';
 import axios from 'axios';
+import Cart from './pages/Cart'
 export let Context1 = createContext()
 
 
@@ -53,22 +54,22 @@ function App() {
                   })}
               </div>
             </div>
-            <button onClick={()=>{
+            <button onClick={() => {
               axios.get('https://codingapple1.github.io/shop/data2.json')
-              .then((결과)=>{
-                console.log(결과.data)
-                let shoescopy = [...shoes, ...결과.data];
-                setShoes(shoescopy)
-              })
+                .then((결과) => {
+                  console.log(결과.data)
+                  let shoescopy = [...shoes, ...결과.data];
+                  setShoes(shoescopy)
+                })
               Promise.all([])
             }}>Button</button>
           </>
         } />
         <Route path="/detail/:id" element={
-        <Context1.Provider>
-        <Detail shoes={shoes} />
-        </Context1.Provider>
-      } />
+          <Context1.Provider>
+            <Detail shoes={shoes} />
+          </Context1.Provider>
+        } />
 
 
 
@@ -81,6 +82,8 @@ function App() {
           <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>} />
           <Route path='two' element={<div>생일기념 쿠폰받기</div>} />
         </Route>
+
+        <Route path='/cart' element={<Cart/>} />
       </Routes>
 
 
