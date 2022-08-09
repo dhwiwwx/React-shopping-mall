@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Nav } from 'react-bootstrap';
 import { Context1 } from './../App';
+import {addItem} from '../Store'
+import {useDispatch} from 'react-redux';
 
 function Detail(props) {
 
@@ -27,6 +29,7 @@ function Detail(props) {
   let { id } = useParams();
   let found = props.shoes.find(x => x.id == id)
   let [tab, setTab] = useState(0)
+  let dispatch = useDispatch()
 
   return (
     <div className={"container start " + DetailFade}>
@@ -47,7 +50,7 @@ function Detail(props) {
           <h4 className="pt-5">{found.title}</h4>
           <p>{found.content}</p>
           <p>{found.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={()=>{dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))}}>주문하기</button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
