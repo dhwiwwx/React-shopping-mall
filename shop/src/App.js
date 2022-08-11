@@ -21,7 +21,8 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link onClick={() => { navigate(-1) }}>Home</Nav.Link>
-              <Nav.Link onClick={() => { navigate('/detail') }}>Detail</Nav.Link>
+              <Nav.Link onClick={() => { navigate('/detail/0') }}>Detail</Nav.Link>
+              <Nav.Link onClick={() => { navigate('/cart') }}>Cart</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
