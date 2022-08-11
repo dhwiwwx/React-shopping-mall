@@ -50,7 +50,9 @@ function Detail(props) {
           <h4 className="pt-5">{found.title}</h4>
           <p>{found.content}</p>
           <p>{found.price}원</p>
-          <button className="btn btn-danger" onClick={()=>{dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))}}>주문하기</button>
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem({id : 1, name : 'Red Knit', count : 1}))
+            }}>주문하기</button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
