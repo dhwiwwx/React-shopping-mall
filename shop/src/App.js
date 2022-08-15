@@ -1,17 +1,25 @@
 import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './App.css';
 import React, { createContext, useState } from 'react';
+
 import Data from './data.js';
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail';
 import axios from 'axios';
+import {useQuery} from '@tanstack/react-query'
 import Cart from './pages/Cart'
-export let Context1 = createContext()
+export let Context1 = createContext();
 
 
 function App() {
   let [shoes, setShoes] = useState(Data);
   let navigate = useNavigate();
+  let result = useQuery('naming',()=>{
+    return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+    return a.data
+    })
+  })
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
