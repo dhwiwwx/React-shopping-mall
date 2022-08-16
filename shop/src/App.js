@@ -4,6 +4,7 @@ import React,{ Suspense, createContext, lazy, useState } from 'react';
 import Data from './data.js';
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
+import { useTransition } from 'react';
 export let Context1 = createContext();
 const Detail = lazy( () => import('./pages/Detail') )
 const Cart = lazy( () => import('./pages/Cart') )
@@ -15,7 +16,9 @@ const Cart = lazy( () => import('./pages/Cart') )
 function App() {
   let [shoes, setShoes] = useState(Data);
   let navigate = useNavigate();
- 
+  let [name, setName] = useState('')
+  useTransition()
+  let a = new Array(10000).fill(0)
 
   return (
     <div className="App">
@@ -30,12 +33,18 @@ function App() {
               <Nav.Link onClick={() => { navigate('/cart') }}>Cart</Nav.Link>
             </Nav>
             <Nav className='ms-auto'>
+              <input onChange={(e)=>{setName(e.target.value)}}/>
+              {
+                a.map(()=>{
+                  return <div>{name}</div>
+                })
+              }
             </Nav>
             
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <Suspense fallback={<div>Loading</div>}> */}
+      <Suspense fallback={<div>Loading</div>}>
       <Routes>
         <Route path="/" element={
           <>
@@ -54,7 +63,8 @@ function App() {
                 {
                   shoes.map((a, i) => {
                     return <Card shoes={shoes[i]} i={i} key={i}></Card>
-                  })}
+                  })
+                  }
               </div>
             </div>
             <button onClick={() => {
@@ -69,7 +79,7 @@ function App() {
           </>
         } />
         <Route path="/detail/:id" element={
-          <Context1.Provider>
+          <Context1.Provider value={{}}>
             <Detail shoes={shoes} />
           </Context1.Provider>
         } />
@@ -77,18 +87,16 @@ function App() {
 
 
         <Route path="*" element={<div>없는페이지</div>} />
-        <Route path='/about' element={<About></About>}>
-          <Route path='member' element={<div>member</div>} />
-          <Route path='location' element={<div>location</div>} />
-        </Route>
-        <Route path='/event' element={<Event></Event>}>
-          <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>} />
-          <Route path='two' element={<div>생일기념 쿠폰받기</div>} />
-        </Route>
+        <Route path='/about' element={<About></About>} />
+        <Route path='/member' element={<div>member</div>} />
+        <Route path='/location' element={<div>location</div>} />
+        <Route path='/event' element={<Event></Event>} />
+        <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>} />
+        <Route path='two' element={<div>생일기념 쿠폰받기</div>} />
 
         <Route path='/cart' element={<Cart/>} />
       </Routes>
-      {/* </Suspense> */}
+      </Suspense>
 
 
     </div >
