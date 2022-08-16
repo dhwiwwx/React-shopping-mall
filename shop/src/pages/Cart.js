@@ -1,18 +1,24 @@
+import { memo, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Store from '../Store';
 import { addCount } from '../Store';
 import { changeName, increase } from '../Store/userSlice';
 
-function Cart() {
+function Memo (){
+    return
+}
 
+function Cart() {
+    let result = useMemo(()=>{return Memo()},[])
     let state = useSelector((state) => state)
     let dispatch = useDispatch()
-
+    let [count,setCount] = useState(0);
 
     return (
         <div>
-
+            
+            <button onClick={()=>{setCount(count+1)}}>+</button>
             <Table>
                 <thead>
                     <tr>
