@@ -1,24 +1,21 @@
-import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
 import './App.css';
-import React, { createContext, useState } from 'react';
-
+import { Navbar,Nav, NavDropdown, Container, Button } from 'react-bootstrap';
+import React,{ Suspense, createContext, lazy, useState } from 'react';
 import Data from './data.js';
 import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
-import Detail from './pages/Detail';
 import axios from 'axios';
-import {useQuery} from '@tanstack/react-query'
-import Cart from './pages/Cart'
 export let Context1 = createContext();
+const Detail = lazy( () => import('./pages/Detail') )
+const Cart = lazy( () => import('./pages/Cart') )
+
+
+
 
 
 function App() {
   let [shoes, setShoes] = useState(Data);
   let navigate = useNavigate();
-  let result = useQuery('naming',()=>{
-    return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
-    return a.data
-    })
-  })
+ 
 
   return (
     <div className="App">
@@ -31,17 +28,14 @@ function App() {
               <Nav.Link onClick={() => { navigate(-1) }}>Home</Nav.Link>
               <Nav.Link onClick={() => { navigate('/detail/0') }}>Detail</Nav.Link>
               <Nav.Link onClick={() => { navigate('/cart') }}>Cart</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown>
             </Nav>
+            <Nav className='ms-auto'>
+            </Nav>
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* <Suspense fallback={<div>Loading</div>}> */}
       <Routes>
         <Route path="/" element={
           <>
@@ -94,6 +88,7 @@ function App() {
 
         <Route path='/cart' element={<Cart/>} />
       </Routes>
+      {/* </Suspense> */}
 
 
     </div >
