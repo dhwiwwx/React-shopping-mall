@@ -18,7 +18,7 @@ function Cart() {
     return (
         <div>
             
-            <button onClick={()=>{setCount(count+1)}}>+</button>
+    
             <Table>
                 <thead>
                     <tr>

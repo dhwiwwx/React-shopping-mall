@@ -6,6 +6,7 @@ import { Link, Route, Routes, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { useTransition } from 'react';
 export let Context1 = createContext();
+
 const Detail = lazy( () => import('./pages/Detail') )
 const Cart = lazy( () => import('./pages/Cart') )
 
@@ -32,14 +33,7 @@ function App() {
               <Nav.Link onClick={() => { navigate('/detail/0') }}>Detail</Nav.Link>
               <Nav.Link onClick={() => { navigate('/cart') }}>Cart</Nav.Link>
             </Nav>
-            <Nav className='ms-auto'>
-              <input onChange={(e)=>{setName(e.target.value)}}/>
-              {
-                a.map(()=>{
-                  return <div>{name}</div>
-                })
-              }
-            </Nav>
+            
             
           </Navbar.Collapse>
         </Container>
@@ -67,7 +61,7 @@ function App() {
                   }
               </div>
             </div>
-            <button onClick={() => {
+            <Button variant="primary"onClick={() => {
               axios.get('https://codingapple1.github.io/shop/data2.json')
                 .then((결과) => {
                   console.log(결과.data)
@@ -75,7 +69,8 @@ function App() {
                   setShoes(shoescopy)
                 })
               Promise.all([])
-            }}>Button</button>
+            }}>Button</Button> 
+            
           </>
         } />
         <Route path="/detail/:id" element={
@@ -102,6 +97,7 @@ function App() {
     </div >
   );
 }
+
 function About() {
   return (
     <div>
