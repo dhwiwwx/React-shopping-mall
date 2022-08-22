@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Store from '../Store';
 import { addCount } from '../Store';
 import { changeName, increase } from '../Store/userSlice';
-
+import App from '../App';
 function Memo (){
     return
 }
@@ -36,7 +36,7 @@ function Cart() {
                                 <td>{state.cart[i].name}</td>
                                 <td>{state.cart[i].count}</td>
                                 <td>
-                                    <button onClick={()=>dispatch(addCount(state.cart[i].id))}>+</button>
+                                    <button className='Plus_Button' onClick={()=>dispatch(addCount(state.cart[i].id))}>+</button>
                                 </td>
                             </tr>
                         )

@@ -69,7 +69,7 @@ function App() {
                   setShoes(shoescopy)
                 })
               Promise.all([])
-            }}>Button</Button> 
+            }}>더보기</Button> 
             
           </>
         } />

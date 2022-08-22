@@ -81,9 +81,8 @@ function TabContent({ tab }) {
         }
     }, [tab])
     return <div className={'start ' + fade}>
-        {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+        {[<div></div>, <div>내용1</div>, <div>내용2</div>][tab]}
     </div>
 }
 
 export default Detail;
-// Detail page 화면안뜨는 이유 찾기..ㅠ
